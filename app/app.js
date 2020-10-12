@@ -14,7 +14,16 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+  createGenerateClassName,
+} from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
 import 'sanitize.css/sanitize.css';
+// Bulma CSS for light weight CSS. One can any css framework
+import 'bulma/css/bulma.min.css';
 
 // Import root app
 import App from 'containers/App';
@@ -38,12 +47,29 @@ const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
+// Create a theme instance.
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+    accent: red,
+    type: 'light',
+  },
+  typography: {
+    useNextVariants: true,
+  },
+});
+
+// Create a sheetsManager instance.
+const sheetsManager = new Map();
+
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <App />
+          <MuiThemeProvider theme={theme} sheetsManager={sheetsManager}>
+            <App />
+          </MuiThemeProvider>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,
