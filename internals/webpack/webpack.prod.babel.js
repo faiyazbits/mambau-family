@@ -116,8 +116,8 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     new WebpackPwaManifest({
-      name: 'React Boilerplate',
-      short_name: 'React BP',
+      name: 'Mambau ul uloom Family App',
+      short_name: 'Mambau Family',
       description: 'My React Boilerplate-based project!',
       background_color: '#fafafa',
       theme_color: '#b1624d',
